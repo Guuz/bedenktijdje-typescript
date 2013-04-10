@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 			}
 		},
 
+		clean: ['build'],
+
 		copy: {
 			sources: {
 				files: [{expand: true, cwd: 'src/', src: ['*.ts'], dest: 'build/'}]
@@ -27,9 +29,10 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-typescript');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('default', ['typescript', 'copy']);
+	grunt.registerTask('default', ['clean', 'typescript', 'copy']);
 
 };
