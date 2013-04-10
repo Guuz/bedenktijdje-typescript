@@ -7,6 +7,8 @@ class Car {
 		this.nrOfDoors = nrOfDoors;
 	}
 
+	// constructor( public brand:string, public nrOfDoors:number ) {}
+
 	public getDescription() {
 		if( this.brand && this.nrOfDoors) {
 			return this._makeDescription();
