@@ -1,0 +1,8 @@
+{
+  "name": "bedenktijdje-typescript",
+  "version": "0.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-typescript": "~0.1.3"
+  }
+}
