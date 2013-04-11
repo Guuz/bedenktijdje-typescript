@@ -51,4 +51,4 @@ module Garage {
 	Garage.addCar( opel );
 	console.log( Garage.listCars() );
 
-}());
+})();

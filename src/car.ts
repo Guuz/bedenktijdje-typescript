@@ -38,4 +38,4 @@ class Car {
 	car.nrOfDoors = 3;
 	console.log( car.getDescription() );
 
-}());
+})();
