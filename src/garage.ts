@@ -29,8 +29,8 @@ module demo.modules {
 
 			return ret.join('\n');
 
-			// var brands = cars.map(car => car.brand);
-			// return brands.join('\n');
+			//var brands = cars.map(car => car.brand);
+			//return brands.join('\n');
 		}
 
 	}
