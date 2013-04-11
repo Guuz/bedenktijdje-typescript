@@ -1,43 +1,38 @@
 ///<reference path="../d.ts/jquery.d.ts"/>
 
-(function() {
-
+module demo.jquery {
 	var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
 
-	var jqXHR = $.getJSON( flickerAPI, {
-		tags: "landscape",
-		tagmode: "any",
-		format: "json"
-	});
+	export function showSomeImages( callback:Function ) {
+		var jqXHR = startRequest();
 
-	jqXHR.done(function( data ) {
-		$.each( data.items, function( i, item ) {
+		jqXHR.done(function( data ) {
+			$.each( data.items, function( i, item ) {
 
-			var $img = $('<img>')
-				.hide()
-				.attr( "src", item.media.m )
-				.appendTo('body');
+				var $img = $('<img>')
+					.css('opacity', 0)
+					.attr( "src", item.media.m )
+					.appendTo('body');
 
-			$img.on('load', function() {
-				$(this).fadeIn();
+				showImageWhenLoaded( $img );
 			});
-
 		});
-	});
+	}
 
-	// jqXHR.done( ( data ) => {
-	// 	$.each( data.items, ( i, item ) => {
 
-	// 		var $img = $('<img>')
-	// 			.hide()
-	// 			.attr( "src", item.media.m )
-	// 			.appendTo('body');
 
-	// 		$img.on('load', function() {
-	// 			$(this).fadeIn();
-	// 		});
+	function startRequest() {
+		return $.getJSON( flickerAPI, {
+			tags: "landscape",
+			tagmode: "any",
+			format: "json"
+		});
+	}
 
-	// 	});
-	// });
+	function showImageWhenLoaded( $img ) {
+		$img.on('load', function() {
+			$img.fadeTo(300, 1);
+		});
+	}
 
-})();
+}
