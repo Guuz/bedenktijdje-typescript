@@ -31,7 +31,7 @@ module demo.jquery {
 		});
 	}
 
-	function showImageWhenLoaded( $img ) {
+	function showImageWhenLoaded( $img: JQuery ) {
 		$img.on('load', function() {
 			$img.fadeTo(300, 1);
 		});
