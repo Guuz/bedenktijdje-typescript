@@ -14,7 +14,7 @@ module demo.interfaces {
 	}
 
 	function printSandwich( options:ISandwichOptions ) {
-		var defaults = {
+		var defaults: ISandwichOptions = {
 			name: ''
 		  , description: 'No description.'
 		  , price: 0
