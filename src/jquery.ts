@@ -37,4 +37,14 @@ module demo.jquery {
 		});
 	}
 
+
+
+	export function runDemo() {
+		console.log('Showing some images...');
+
+		showSomeImages( () => {
+			console.log('Images loaded.');
+		});
+	}
+
 }
