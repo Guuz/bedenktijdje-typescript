@@ -1,14 +1,15 @@
 ///<reference path="car.ts"/>
 
 module demo.modules {
+	import classes = demo.classes;
 
 	export module garage {
 
 		export var name = 'Q Electric Car Park';
 		var spaces = 2;
-		var cars: demo.classes.Car[] = [];
+		var cars: classes.Car[] = [];
 
-		export function addCar( car: demo.classes.Car ) {
+		export function addCar( car: classes.Car ) {
 			if( !isFull() ) {
 				cars.push( car );
 			}
@@ -38,7 +39,7 @@ module demo.modules {
 
 
 	export function runDemo() {
-		var Car = demo.classes.Car
+		var Car = classes.Car
 		  , tesla = new Car( 'Tesla', 5 )
 		  , opel = new Car( 'Opel', 5 )
 
