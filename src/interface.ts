@@ -13,18 +13,18 @@ module demo.interfaces {
 		chicken?: bool;
 	}
 
-	function printSandwich( options:ISandwichOptions ) {
-		var defaults: ISandwichOptions = {
-			name: ''
-		  , description: 'No description.'
-		  , price: 0
-		  , rating: null
-		  , bacon: false
-		  , lettuce: false
-		  , tomato: false
-		  , chicken: false
-		}
+	var defaults: ISandwichOptions = {
+		name: ''
+		, description: 'No description.'
+		, price: 0
+		, rating: null
+		, bacon: false
+		, lettuce: false
+		, tomato: false
+		, chicken: false
+	}
 
+	function printSandwich( options:ISandwichOptions ) {
 		var settings = $.extend( defaults, options );
 
 		// Maak een human readable string van de settings.
@@ -39,11 +39,11 @@ module demo.interfaces {
 	export function runDemo() {
 		printSandwich({
 			name: 'BLT'
-		  , price: 4.5
-		  , rating: 8
-		  , bacon: true
-		  , lettuce: true
-		  , tomato: true
+			, price: 4.5
+			, rating: 8
+			, bacon: true
+			, lettuce: true
+			, tomato: true
 		});
 	}
 }
