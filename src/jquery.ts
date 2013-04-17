@@ -3,38 +3,41 @@
 module demo.jquery {
 	var flickerAPI = 'http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?';
 
-	export function showSomeImages( callback?:Function = $.noop ) {
-		var jqXHR = startRequest();
+	export function showSomeImages() : JQueryPromise {
+		var jqXHR = $.getJSON( flickerAPI, {
+		              	tags: 'landscape',
+		              	tagmode: 'any',
+		              	format: 'json'
+		              });
 
-		jqXHR.done(function( data ) {
-			$.each( data.items, function( i, item ) {
-
-				var $img = $('<img>')
-					.css('opacity', 0)
-					.attr( 'src', item.media.m )
-					.appendTo('body');
-
-				showImageWhenLoaded( $img );
-			});
-		});
-
-		jqXHR.always( callback );
+		return jqXHR.then( (data) => addImages(data.items) );
 	}
 
+	function addImages(imgs) : JQueryPromise {
+		var addedPromises = imgs.map(addImage);
 
-
-	function startRequest() {
-		return $.getJSON( flickerAPI, {
-			tags: 'landscape',
-			tagmode: 'any',
-			format: 'json'
-		});
+		return $.whenAll(addedPromises);
 	}
 
-	function showImageWhenLoaded( $img: JQuery ) {
-		$img.on('load', function() {
-			$img.fadeTo(300, 1);
-		});
+	function addImage(item) : JQueryPromise {
+
+		var $img = $('<img>')
+			.attr( 'src', item.media.m )
+			.appendTo('body');
+
+		return showImageWhenLoaded( $img );
+	}
+
+	function showImageWhenLoaded( $img: JQuery ) : JQueryPromise {
+		var dfd = $.Deferred();
+
+		$img
+			.css('opacity', 0)
+			.on('load', () => {
+					$img.fadeTo(300, 1).promise().then(dfd.resolve)
+				});
+
+		return dfd.promise();
 	}
 
 
@@ -42,9 +45,17 @@ module demo.jquery {
 	export function runDemo() {
 		console.log('Showing some images...');
 
-		showSomeImages( () => {
-			console.log('Images loaded.');
-		});
+		showSomeImages()
+			.then(() => {
+				console.log('Images loaded.');
+			});
 	}
 
 }
+
+// Extend JQuery with $.whenAll
+interface JQueryStatic {
+	whenAll(promises : JQueryPromise[]) : JQueryPromise;
+}
+$.whenAll = (ps) => $.when.apply($, ps)
+
