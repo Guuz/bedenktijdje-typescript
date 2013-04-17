@@ -9,9 +9,7 @@ module demo.classes {
 			this.brand = brand;
 			this.nrOfDoors = nrOfDoors;
 
-			if( isMoving ) {
-				this.isMoving = isMoving;
-			}
+			this.isMoving = isMoving;
 		}
 
 		//constructor(
