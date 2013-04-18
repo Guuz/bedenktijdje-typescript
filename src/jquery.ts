@@ -5,25 +5,24 @@ module demo.jquery {
 
 	export function showSomeImages() : JQueryPromise {
 		var jqXHR = $.getJSON( flickerAPI, {
-		              	tags: 'landscape',
-		              	tagmode: 'any',
-		              	format: 'json'
-		              });
+			tags: 'landscape',
+			tagmode: 'any',
+			format: 'json'
+		});
 
-		return jqXHR.then( (data) => addImages(data.items) );
+		return jqXHR.then( (data) => addImages( data.items ) );
 	}
 
-	function addImages(imgs) : JQueryPromise {
-		var addedPromises = imgs.map(addImage);
+	function addImages( imgs ) : JQueryPromise {
+		var addedPromises = imgs.map( addImage );
 
-		return $.whenAll(addedPromises);
+		return $.whenAll( addedPromises );
 	}
 
-	function addImage(item) : JQueryPromise {
-
+	function addImage( item ) : JQueryPromise {
 		var $img = $('<img>')
-			.attr( 'src', item.media.m )
-			.appendTo('body');
+				.attr( 'src', item.media.m )
+				.appendTo('body');
 
 		return showImageWhenLoaded( $img );
 	}
@@ -34,8 +33,8 @@ module demo.jquery {
 		$img
 			.css('opacity', 0)
 			.on('load', () => {
-					$img.fadeTo(300, 1).promise().then(dfd.resolve)
-				});
+				$img.fadeTo(300, 1).promise().then( dfd.resolve )
+			});
 
 		return dfd.promise();
 	}
@@ -45,13 +44,13 @@ module demo.jquery {
 	export function runDemo() {
 		console.log('Showing some images...');
 
-		showSomeImages()
-			.then(() => {
-				console.log('Images loaded.');
-			});
+		showSomeImages().then(() => {
+			console.log('Images loaded.');
+		});
 	}
-
 }
+
+
 
 // Extend JQuery with $.whenAll
 interface JQueryStatic {
