@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 		typescript: {
 			sources: {
 				src: ['src/*.ts'],
-				dest: 'build',
+				dest: 'build/scripts.js',
 				options: {
 					base_path: 'src',
 					sourcemap: true
