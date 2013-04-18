@@ -26,7 +26,7 @@ module demo.modules {
 
 			cars.forEach(function( car ) {
 				ret.push( car.brand );
-			})
+			});
 
 			return ret.join('\n');
 

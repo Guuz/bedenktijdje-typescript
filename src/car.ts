@@ -8,7 +8,6 @@ module demo.classes {
 		constructor( brand:string, nrOfDoors:number, isMoving?:bool ) {
 			this.brand = brand;
 			this.nrOfDoors = nrOfDoors;
-
 			this.isMoving = isMoving;
 		}
 
